@@ -209,7 +209,8 @@ const TIERS=[
 const SJ="甲乙丙丁戊己庚辛壬癸",BJ="子丑寅卯辰巳午未申酉戌亥";
 const SE=["Jia","Yi","Bing","Ding","Wu","Ji","Geng","Xin","Ren","Gui"],BE=["Zi","Chou","Yin","Mao","Chen","Si","Wu","Wei","Shen","You","Xu","Hai"];
 const ELJ=["木","火","土","金","水"],ELEN=["Wood","Fire","Earth","Metal","Water"];
-function sg(i){const s=i%10,b=i%12;return{s:SJ[s]+BJ[b],el:s>>1,br:b,ja:`${SJ[s]}${BJ[b]}（${ELJ[s>>1]}）`,en:`${SE[s]}-${BE[b]} (${ELEN[s>>1]})`}}
+const SY=["きのえ","きのと","ひのえ","ひのと","つちのえ","つちのと","かのえ","かのと","みずのえ","みずのと"],BY=["ね","うし","とら","う","たつ","み","うま","ひつじ","さる","とり","いぬ","い"];
+function sg(i){const s=i%10,b=i%12;return{s:SJ[s]+BJ[b],el:s>>1,br:b,ja:`${SJ[s]}${BJ[b]}（${SY[s]}${BY[b]}・${ELJ[s>>1]}）`,en:`${SE[s]}-${BE[b]} (${ELEN[s>>1]})`}}
 const TOPIC5=[
 {ja:"成長・学び・自然",en:"growth, learning and nature"},
 {ja:"夢・音楽・おしゃれ",en:"dreams, music and fashion"},
