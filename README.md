@@ -1,2 +1,19 @@
-# star-match
-誕生日2つから星座で気になる人との相性を占い、話しかけるきっかけまで教えてくれるアプリ
+# Star Match
+
+
+
+- ▶ **Try it:** https://mac-dee.github.io/star-match/
+
+## About
+
+See the app and [IDEA.md](IDEA.md) (the idea log, in Japanese).
+
+## How it was made
+
+Built by shaping the idea together with AI (Claude) and publishing the AI-written code.
+The full conversation is in [IDEA.md](IDEA.md) (Japanese).
+
+## Files
+
+- `index.html` — the app (a single self-contained file)
+- `IDEA.md` — the idea log
