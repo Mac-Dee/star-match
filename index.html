@@ -62,6 +62,11 @@ input[type=date]{width:100%;font:inherit;font-size:16px;padding:11px 12px;border
 .tier{font-size:20px;font-weight:bold;color:var(--pink)}
 .comment{margin:10px auto 0;max-width:420px;font-size:16px}
 .doki{margin:6px 0 0;color:var(--lav);font-size:14px}
+.why{margin-top:18px;text-align:left;background:rgba(255,255,255,.07);border:1px solid rgba(216,200,255,.4);border-radius:14px;padding:16px;font-size:15px}
+.why .t{color:var(--gold);font-size:13px;margin-bottom:8px;font-weight:bold}
+.why ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.why li{padding-left:22px;position:relative}
+.why li:before{content:"✦";position:absolute;left:0;color:var(--gold)}
 .starter{margin-top:18px;text-align:left;background:rgba(255,255,255,.1);border:1px solid #f5c76a;border-radius:14px;padding:16px;font-size:16px}
 .starter .t{color:#f5c76a;font-size:13px;margin-bottom:6px;font-weight:bold}
 .starter .tip{margin-top:10px;font-size:13px;color:var(--lav);border-top:1px dashed rgba(255,255,255,.25);padding-top:8px}
@@ -129,6 +134,10 @@ footer{text-align:center;font-size:12px;color:var(--lav);opacity:.7;margin-top:2
 <div class="tier" id="rTier"></div>
 <p class="comment" id="rComment"></p>
 <p class="doki" id="rDoki"></p>
+<div class="why" data-demo="reason-box">
+<div class="t" data-i18n="whyTitle"></div>
+<ul id="rWhy"></ul>
+</div>
 <div class="starter" data-demo="starter-box">
 <div class="t" data-i18n="starterTitle"></div>
 <div id="rStarter"></div>
@@ -151,12 +160,12 @@ footer{text-align:center;font-size:12px;color:var(--lav);opacity:.7;margin-top:2
 
 <script>
 const I18N={
-ja:{title:"Star Match｜誕生日でわかる、ふたりの相性",tagline:"誕生日でわかる、ふたりの相性",langAria:"言語切り替え",formTitle:"ふたりの誕生日",lblYou:"あなたの誕生日",lblCrush:"気になる人の誕生日",sample:"例を入れる",go:"占う ✨",hint:"星座は誕生日の月と日から判定します。年はどの年でもOK。",errEmpty:"ふたりの誕生日を入れてね。",
-r1:"星を読み取り中…",r2:"ふたりの星が近づいています",r3:"運命の糸をたどっています…",starterTitle:"✨ 話しかけるきっかけ",copy:"一言をコピー",copied:"コピーしました！今日さっそく送ってみよう。",copyFail:"コピーできませんでした。文を長押ししてコピーしてね。",again:"もう一度占う",histTitle:"最近の占い",histEmpty:"まだ占いの履歴はありません。",clear:"履歴を消す",foot:"✦ 占いはエンターテインメントです。楽しむためのものです ✦",x:"×",tipPre:(s,t)=>`${s}の相手には「${t}」の話題が効くかも。`,
-oneLine:"今日の一言"},
-en:{title:"Star Match | Your love compatibility by birthday",tagline:"Your compatibility, told by the stars",langAria:"Language switch",formTitle:"Two birthdays",lblYou:"Your birthday",lblCrush:"Your crush's birthday",sample:"Try an example",go:"Read the stars ✨",hint:"Your sign is picked from the month and day. Any year is fine.",errEmpty:"Please enter both birthdays.",
-r1:"Reading the stars…",r2:"Your two stars are drawing closer",r3:"Following the thread of fate…",starterTitle:"✨ A way to start talking",copy:"Copy the line",copied:"Copied! Try sending it today.",copyFail:"Couldn't copy. Press and hold the text to copy it.",again:"Try again",histTitle:"Recent readings",histEmpty:"No readings yet.",clear:"Clear history",foot:"✦ Horoscopes are just for fun ✦",x:"×",tipPre:(s,t)=>`For a ${s}, try talking about: ${t}.`,
-oneLine:"Today's line"}};
+ja:{title:"Star Match｜算命学でわかる、ふたりの相性",tagline:"算命学で読み解く、ふたりの相性",langAria:"言語切り替え",formTitle:"ふたりの誕生日",lblYou:"あなたの誕生日",lblCrush:"気になる人の誕生日",sample:"例を入れる",go:"占う ✨",hint:"生年月日からその日の干支（十干・十二支）を割り出して占います。年も大切なので正しく入れてね。",errEmpty:"ふたりの誕生日を入れてね。",
+r1:"星を読み取り中…",r2:"ふたりの星が近づいています",r3:"運命の糸をたどっています…",starterTitle:"✨ 話しかけるきっかけ",copy:"一言をコピー",copied:"コピーしました！今日さっそく送ってみよう。",copyFail:"コピーできませんでした。文を長押ししてコピーしてね。",again:"もう一度占う",histTitle:"最近の占い",histEmpty:"まだ占いの履歴はありません。",clear:"履歴を消す",foot:"✦ 占いはエンターテインメントです。楽しむためのものです ✦",x:"×",tipPre:(s,t)=>`相手の日の五行が「${s}」なら、「${t}」の話題が効くかも。`,
+oneLine:"今日の一言",whyTitle:"🔍 相性の根拠"},
+en:{title:"Star Match | Your love compatibility by Sanmeigaku",tagline:"Your match, read through Sanmeigaku, the Japanese art of destiny",langAria:"Language switch",formTitle:"Two birthdays",lblYou:"Your birthday",lblCrush:"Your crush's birthday",sample:"Try an example",go:"Read the stars ✨",hint:"We work out the stem and branch of each birth date. The year matters, so enter it correctly.",errEmpty:"Please enter both birthdays.",
+r1:"Reading the stars…",r2:"Your two stars are drawing closer",r3:"Following the thread of fate…",starterTitle:"✨ A way to start talking",copy:"Copy the line",copied:"Copied! Try sending it today.",copyFail:"Couldn't copy. Press and hold the text to copy it.",again:"Try again",histTitle:"Recent readings",histEmpty:"No readings yet.",clear:"Clear history",foot:"✦ Horoscopes are just for fun ✦",x:"×",tipPre:(s,t)=>`If their day element is ${s}, try talking about: ${t}.`,
+oneLine:"Today's line",whyTitle:"🔍 Why this score"}};
 
 const SIGNS=[
 {s:"♈",ja:"牡羊座",en:"Aries"},{s:"♉",ja:"牡牛座",en:"Taurus"},{s:"♊",ja:"双子座",en:"Gemini"},{s:"♋",ja:"蟹座",en:"Cancer"},
@@ -197,6 +206,24 @@ const TIERS=[
 {min:60,ja:"💗 これから伸びる",en:"💗 Room to grow",hn:3,dja:"ゆっくり近づくほど、じわっと好きになる関係。",den:"The slower you get closer, the sweeter it gets."},
 {min:0,ja:"💓 ドキドキの伸びしろ",en:"💓 Full of surprises",hn:2,dja:"違いがあるから、知るたびにドキドキするはず。",den:"Your differences will keep surprising you."}];
 
+const SJ="甲乙丙丁戊己庚辛壬癸",BJ="子丑寅卯辰巳午未申酉戌亥";
+const SE=["Jia","Yi","Bing","Ding","Wu","Ji","Geng","Xin","Ren","Gui"],BE=["Zi","Chou","Yin","Mao","Chen","Si","Wu","Wei","Shen","You","Xu","Hai"];
+const ELJ=["木","火","土","金","水"],ELEN=["Wood","Fire","Earth","Metal","Water"];
+function sg(i){const s=i%10,b=i%12;return{s:SJ[s]+BJ[b],el:s>>1,br:b,ja:`${SJ[s]}${BJ[b]}（${ELJ[s>>1]}）`,en:`${SE[s]}-${BE[b]} (${ELEN[s>>1]})`}}
+const TOPIC5=[
+{ja:"成長・学び・自然",en:"growth, learning and nature"},
+{ja:"夢・音楽・おしゃれ",en:"dreams, music and fashion"},
+{ja:"グルメ・癒し・地元の話",en:"food, relaxing and your hometown"},
+{ja:"仕事・こだわり・趣味",en:"work, favorite things and hobbies"},
+{ja:"映画・旅・考えごと",en:"movies, travel and deep thoughts"}];
+const REL={
+same:{ja:{c:"同じ五行どうし。言葉にしなくても通じ合う、鏡のようなふたり。",s:["「最近ほっとした瞬間ってあった？」と聞いてみて。心の距離がぐっと近づくよ。","「休みの日はどんなふうに過ごしてる？」と聞いてみて。共通点が見つかるかも。"]},
+ en:{c:"The same element. You are like mirrors who understand without words.",s:["Ask, \"When did you feel most relaxed lately?\" You'll feel closer.","Ask, \"How do you spend your days off?\" You may find something in common."]}},
+gen:{ja:{c:"五行が相生。片方がもう片方を育てる、支え合う最高の流れ！",s:["「最近ハマってることある？」と聞いてみて。話がどんどん広がるよ。","「今いちばん行きたい場所はどこ？」と聞いてみて。次の約束につながりそう。"]},
+ en:{c:"Your elements nourish each other. One lifts the other up!",s:["Ask, \"Got into anything new lately?\" The talk will keep growing.","Ask, \"Where do you most want to go right now?\" It could lead to a plan."]}},
+clash:{ja:{c:"五行が相剋。ぶつかるからこそ惹かれ合う、刺激的なふたり。",s:["「最近ちょっと挑戦したことある？」と聞いてみて。素顔が見えるかも。","「朝型？夜型？」と軽く聞いてみて。違いが会話のネタになるよ。"]},
+ en:{c:"Clashing elements. You attract because you are so different.",s:["Ask, \"Tried anything new lately?\" You may see their real side.","Lightly ask, \"Are you a morning or night person?\" Your differences make a fun topic."]}}};
+
 let lang="en",state=null,timer=null,loadingKey=0;
 const $=id=>document.getElementById(id);
 const t=k=>I18N[lang][k];
@@ -228,39 +255,43 @@ function applyLang(){
 function signOf(str){
  const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(str||"");
  if(!m)return -1;
- const v=(+m[2])*100+(+m[3]);
- if(v>=1222||v<=119)return 9;
- if(v<=218)return 10;
- if(v<=320)return 11;
- if(v<=419)return 0;
- if(v<=520)return 1;
- if(v<=621)return 2;
- if(v<=722)return 3;
- if(v<=822)return 4;
- if(v<=922)return 5;
- if(v<=1023)return 6;
- if(v<=1122)return 7;
- return 8;
+ const d=Date.UTC(+m[1],+m[2]-1,+m[3]);
+ if(isNaN(d))return -1;
+ const n=Math.round((d-Date.UTC(1900,0,1))/864e5);
+ return ((n+10)%60+60)%60;
 }
 function calc(a,b){
  const lo=Math.min(a,b),hi=Math.max(a,b);
- const ea=ELEM[a%4],eb=ELEM[b%4];
- const key=[ea,eb].sort().join("");
- const k=BASE[key]?key:key.split("").reverse().join("");
- let sc=BASE[k]+((lo*7+hi*13+lo*hi)%15)-7;
- if(hi-lo===6)sc+=5;
- if(hi===lo)sc+=3;
+ const A=sg(a),B=sg(b);
+ const d=(B.el-A.el+5)%5;
+ const k=d===0?"same":(d===1||d===4)?"gen":"clash";
+ let sc={same:78,gen:88,clash:66}[k]+((lo*7+hi*13+lo*hi)%15)-7;
+ if((A.br+B.br)%12===1)sc+=6;
+ if((A.br-B.br+12)%12===6)sc+=3;
+ if(A.br===B.br)sc+=2;
  sc=Math.max(42,Math.min(99,sc));
- return{score:sc,key:k,pick:(lo+hi)%2};
+ return{score:sc,key:k,pick:(a+b)%2};
 }
 function tierOf(s){return TIERS.find(x=>s>=x.min)}
+function reasons(a,b){
+ const A=sg(a),B=sg(b),d=(B.el-A.el+5)%5,L=lang==="ja",E=L?ELJ:ELEN,r=[];
+ r.push(L?`あなたの日柱は「${A.ja}」、相手は「${B.ja}」。生まれた日の干支から割り出しました。`:`Your day pillar is ${A.en}, and theirs is ${B.en}. Both come from the birth dates.`);
+ if(d===0)r.push(L?`五行はどちらも「${E[A.el]}」。価値観が似ていて、安心できる関係です。`:`You share the same element, ${E[A.el]}. Similar values make it feel safe.`);
+ else if(d===1||d===4){const f=d===1?A:B,o=d===1?B:A;r.push(L?`五行が相生：「${E[f.el]}」が「${E[o.el]}」を育てる関係。自然に支え合えます。`:`Generating cycle: ${E[f.el]} nourishes ${E[o.el]}. You support each other naturally.`)}
+ else{const f=d===2?A:B,o=d===2?B:A;r.push(L?`五行が相剋：「${E[f.el]}」が「${E[o.el]}」を抑える関係。刺激が強く、惹かれ合う力にもなります。`:`Controlling cycle: ${E[f.el]} checks ${E[o.el]}. It is intense, and that can pull you together.`)}
+ const x=(A.br+B.br)%12===1,y=(A.br-B.br+12)%12===6,z=A.br===B.br;
+ if(x)r.push(L?`十二支が「六合」（${BJ[A.br]}と${BJ[B.br]}）。強く結びつく組み合わせで、スコアに加点。`:`Your branches (${BE[A.br]} and ${BE[B.br]}) form a "six harmony", a strong bond. Bonus points.`);
+ if(y)r.push(L?`十二支が正反対（${BJ[A.br]}と${BJ[B.br]}）。強く意識し合う関係で、少し加点。`:`Your branches (${BE[A.br]} and ${BE[B.br]}) sit opposite each other. You notice each other strongly. A small bonus.`);
+ if(z)r.push(L?`十二支が同じ「${BJ[A.br]}」。気持ちが通じやすく、少し加点。`:`You share the branch ${BE[A.br]}. Easy to connect. A small bonus.`);
+ if(!x&&!y&&!z)r.push(L?"十二支に特別な組み合わせはなし。五行の関係が決め手です。":"No special branch pairing. The elements decide the score.");
+ return r;
+}
 
 function show(id){["formCard","loading","result"].forEach(x=>{if(x!=="formCard")$(x).hidden=(x!==id)});}
 
 function loadingText(stage){
- $("lt").textContent=t(stage===0?"r1":stage===1?"r3":"r1");
- $("ls").textContent=t(stage===0?"r2":stage===1?"r3":"r2");
- if(stage===1)$("lt").textContent=t("r1");
+ $("lt").textContent=t(["r1","r2","r3"][stage]||"r1");
+ $("ls").textContent="";
 }
 function go(){
  const da=$("dA").value,db=$("dB").value;
@@ -302,15 +333,17 @@ function finish(){
 }
 function renderResult(animate){
  if(!state)return;
- const A=SIGNS[state.a],B=SIGNS[state.b],c=COMBO[state.key][lang],tr=tierOf(state.score);
- $("rSigns").textContent=`${A.s} ${A[lang]} ${t("x")} ${B.s} ${B[lang]}`;
+ const A=sg(state.a),B=sg(state.b),c=REL[state.key][lang],tr=tierOf(state.score);
+ $("rSigns").textContent=`${A[lang]} ${t("x")} ${B[lang]}`;
  $("rNum").innerHTML=state.score+"<small>%</small>";
  $("rHearts").textContent="❤".repeat(tr.hn)+"🤍".repeat(5-tr.hn);
  $("rTier").textContent=tr[lang];
  $("rComment").textContent=c.c;
  $("rDoki").textContent=lang==="ja"?tr.dja:tr.den;
  $("rStarter").textContent=c.s[state.pick];
- $("rTip").textContent=t("tipPre")(B[lang],TOPICS[ELEM[state.b%4]][lang]);
+ $("rWhy").innerHTML="";
+ reasons(state.a,state.b).forEach(s=>{const li=document.createElement("li");li.textContent=s;$("rWhy").appendChild(li)});
+ $("rTip").textContent=t("tipPre")(lang==="ja"?ELJ[B.el]:ELEN[B.el],TOPIC5[B.el][lang]);
  const circ=552.92,fg=$("rFg");
  if(animate){
   fg.style.transition="none";fg.style.strokeDashoffset=circ;
@@ -336,8 +369,8 @@ function renderHistory(){
  h.forEach(x=>{
   const a=signOf(x.a),b=signOf(x.b),r=calc(a,b);
   const btn=document.createElement("button");btn.type="button";btn.dataset.demo="history-item";
-  btn.innerHTML=`${SIGNS[a].s} ${t("x")} ${SIGNS[b].s} <b>${r.score}%</b>`;
-  btn.setAttribute("aria-label",`${SIGNS[a][lang]} ${t("x")} ${SIGNS[b][lang]} ${r.score}%`);
+  btn.innerHTML=`${sg(a).s} ${t("x")} ${sg(b).s} <b>${r.score}%</b>`;
+  btn.setAttribute("aria-label",`${sg(a)[lang]} ${t("x")} ${sg(b)[lang]} ${r.score}%`);
   btn.onclick=()=>{
    $("dA").value=x.a;$("dB").value=x.b;
    state={a,b,da:x.a,db:x.b,score:r.score,key:r.key,pick:r.pick,stage:0};
