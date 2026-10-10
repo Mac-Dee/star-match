@@ -3,6 +3,7 @@
 
 
 - ▶ **Try it:** https://mac-dee.github.io/star-match/
+- 🎬 **Demo video:** https://mac-dee.github.io/star-match/demo.mp4
 
 ## About
 
